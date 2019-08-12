@@ -1,0 +1,10 @@
+  <%=comment.author.username%>:
+  <%=comment.content%> (<a href="<%=comment_url(comment)%>">link</a>)
+  
+
+   <ul>
+   <% comments_by_parent_id[comment.id].each do |child|%>
+     <li><%= render partial: 'comments/comment', locals: {comment: child, comments_by_parent_id: comments_by_parent_id } %></li>
+   <%end%>
+   </ul>
+  
