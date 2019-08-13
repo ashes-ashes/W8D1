@@ -10,23 +10,31 @@
   </head>
 
   <body>
+  <header>
+    <h1>reddit.clone</h1>
+    <ul>
     <% if logged_in? %>
-      <h4>Hello <%= current_user.username %></h4>
-      <form action="<%=session_url%>" method="POST">
+      <li><span class="greeting">Hello, <%= current_user.username %></span></li>
+      <li><form class="just_button" action="<%=session_url%>" method="POST">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
         <input type="submit" value="Sign out">
-      </form>
+      </form></li>
     <% else %>
-      <a href="<%=new_session_url%>">Sign In</a>
-      <a href="<%=new_user_url%>">Sign Up</a>
+      <li><a href="<%=new_session_url%>">Sign In</a></li>
+      <li><a href="<%=new_user_url%>">Sign Up</a></li>
     <% end %>
-
+    </ul>
+  </header>
+  <div class="main-content">
+  <div class="errorbar">
     <% if flash[:errors] %>
       <%flash[:errors].each do |error|%>
-        <div style="color: red"><%=error%></div>
+        <div class="error"><%=error%></div>
       <%end%>
     <%end%>
+  </div>
     <%= yield %>
+  </div>
   </body>
 </html>
